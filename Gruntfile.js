@@ -1,6 +1,19 @@
 const queues = require('./lib/queue')
 
 module.exports = (grunt) => {
+  grunt.initConfig({
+    nodocs: {
+      external: {
+        options: {
+          src: 'index.js',
+          dest: 'README.md',
+          start: ['/*'],
+        }
+      }
+    }
+  })
+  grunt.loadNpmTasks('grunt-nodocs');
+
   grunt.registerTask('stop', '...', async function (company_id = 0) {
     done = this.async()
     try {
