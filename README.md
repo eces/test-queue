@@ -1,6 +1,14 @@
 # Job Queue test
 큐 호스팅 만들기 전에 이것저것 테스트합니다.
 
+#### 시작하기
+`npm start`
+
+#### 문서 빌드
+`grunt nodocs`
+
+----------------------------
+
 ### kue.js 테스트
 - global events(enqueue)가 잘되어있어서 커스텀 하기 좋음
 - .delay() 이런식 API도 좋음

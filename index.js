@@ -5,6 +5,14 @@ const queues = require('./lib/queue')
 /*
  * # Job Queue test
  * 큐 호스팅 만들기 전에 이것저것 테스트합니다.
+ * 
+ * #### 시작하기
+ * `npm start`
+ * 
+ * #### 문서 빌드
+ * `grunt nodocs`
+ * 
+ * ----------------------------
  */
 
 const actions = {}
