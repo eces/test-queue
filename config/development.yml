@@ -1,0 +1,6 @@
+redis:
+  master:
+    host: localhost
+    port: 6379
+  sentinels:
+  clusters:

@@ -1,0 +1,29 @@
+{
+  "name": "test-queue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "test": "mocha tests/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eces/test-queue.git"
+  },
+  "author": "eces",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eces/test-queue/issues"
+  },
+  "homepage": "https://github.com/eces/test-queue#readme",
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "config": "^1.26.2",
+    "js-yaml": "^3.10.0",
+    "kue": "^0.11.6"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1"
+  }
+}
