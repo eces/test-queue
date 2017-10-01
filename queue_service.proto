@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package queue_service;
+
+service QueueService {
+  rpc subscribe(Topic) returns (stream Message) {}
+  rpc publish(PostMessage) returns (MessageReceipt) {}
+}
+
+message Topic {
+  string name = 1;
+}
+
+message PostMessage {
+  string name = 1;
+  string data = 2;
+  string option = 3;
+}
+
+message Message {
+  string id = 1;
+  string body = 2;
+}
+
+message MessageReceipt {
+  string id = 1;
+}
