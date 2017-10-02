@@ -258,8 +258,8 @@ actions['grpcq.io 테스트'] = function () {
 }
 
 async function main() {
-  // actions['bull + grpc.io 테스트']()
-  actions['grpcq.io 테스트']()
+  actions['bull + grpc.io 테스트']()
+  // actions['grpcq.io 테스트']()
   console.log(chalk`> {green NOW RUNNING}`)
   // console.log('> JobCounts', await queue_5m_bull.getJobCounts())
 
