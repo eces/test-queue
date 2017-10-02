@@ -224,9 +224,42 @@ actions['bull + grpc.io 테스트'] = function () {
   // client.subscribe()
 }
 
+actions['grpcq.io 테스트'] = function () {
+  /*
+   * ### grpcq.io 테스트
+   * - grpc queue라는 느낌을 살리자. 괜히 새롭게 할 필요없음.
+   */
+  const Queue = require('lemongrass')
+  const queue = Queue.get('dev find reservation 5m', {
+    engine: {
+      type: 'sqs',
+      access_key: '...',
+      secret_key: '...',
+    },
+    timeout: 5000,
+    max_retry: 20,
+    deadletter: 'dev find reservation failed',
+  })
+  queue.subscribe({
+    name: 'dev find reservation 5m',
+    type: 'sqs',
+    access_key: '...',
+    secret_key: '...',
+    timeout: 5000,
+    max_retry: 20,
+    deadletter: 'dev find reservation failed',
+  })
+  .on('data', (message) => {
+    console.log('[client] got message', message)
+  })
+  .on('status', (status) => {
+    console.log('[client] status ', status)
+  })
+}
 
 async function main() {
-  actions['bull + grpc.io 테스트']()
+  // actions['bull + grpc.io 테스트']()
+  actions['grpcq.io 테스트']()
   console.log(chalk`> {green NOW RUNNING}`)
   // console.log('> JobCounts', await queue_5m_bull.getJobCounts())
 
