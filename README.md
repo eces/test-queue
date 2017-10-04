@@ -34,3 +34,15 @@
   > 해당 job process done(null, 정상처리) 끝내는게 좋을듯.
   > 단 VisibilityTimeout만큼 timeout이 필요함 + 해당 ReceiptID invalidate.
 
+### grpcq.io 테스트
+- grpc queue라는 느낌을 살리자. 괜히 새롭게 할 필요없음.
+
+#### 사용하기
+```js
+const grpcq = require('grpcq')
+grpcq
+ .subscribe({})
+ .on('message', handler)
+ .on('error', error)
+```
+

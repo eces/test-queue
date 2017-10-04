@@ -228,38 +228,60 @@ actions['grpcq.io 테스트'] = function () {
   /*
    * ### grpcq.io 테스트
    * - grpc queue라는 느낌을 살리자. 괜히 새롭게 할 필요없음.
+   * 
+   * #### 사용하기
+   * ```js
+   * const grpcq = require('grpcq')
+   * grpcq
+   *  .subscribe({})
+   *  .on('message', handler)
+   *  .on('error', error)
+   * ```
    */
-  const Queue = require('lemongrass')
-  const queue = Queue.get('dev find reservation 5m', {
-    engine: {
+
+  // const Queue = require('lemongrass')
+  // const queue = grpcq.defaults({
+  // const queue1 = grpcq.configure({  
+  // grpcq.setDefault({})
+  // backend: {
+  //   type: 'sqs',
+  // },
+  
+  try {
+    // const grpcq = require('grpcq')
+    // const grpcq = require('./lib/grpcq')
+    // const grpcq = require('./lib/grpcq').defaults({
+    //   type: 'sqs',
+    //   access_key_id: config.get('aws.ACCESS_KEY_ID'),
+    //   secret_access_key: config.get('aws.SECRET_ACCESS_KEY'),
+    // })
+    const grpcq = require('./lib/grpcq')
+    
+    grpcq.createServer({version:1}).start()
+  
+    grpcq.subscribe({
+      name: 'dev find reservation 5m',
+      timeout: 5000,
+      max_retry: 20,
+      deadletter: 'dev find reservation failed',
       type: 'sqs',
-      access_key: '...',
-      secret_key: '...',
-    },
-    timeout: 5000,
-    max_retry: 20,
-    deadletter: 'dev find reservation failed',
-  })
-  queue.subscribe({
-    name: 'dev find reservation 5m',
-    type: 'sqs',
-    access_key: '...',
-    secret_key: '...',
-    timeout: 5000,
-    max_retry: 20,
-    deadletter: 'dev find reservation failed',
-  })
-  .on('data', (message) => {
-    console.log('[client] got message', message)
-  })
-  .on('status', (status) => {
-    console.log('[client] status ', status)
-  })
+      access_key_id: config.get('aws.ACCESS_KEY_ID'),
+      secret_access_key: config.get('aws.SECRET_ACCESS_KEY'),
+    })
+    .on('message', (message) => {
+      console.log('[client] got message', message)
+    })
+    .on('error', (error) => {
+      console.log('[client] got error', error)
+    })
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 async function main() {
-  actions['bull + grpc.io 테스트']()
-  // actions['grpcq.io 테스트']()
+  // actions['bull + grpc.io 테스트']()
+  actions['grpcq.io 테스트']()
   console.log(chalk`> {green NOW RUNNING}`)
   // console.log('> JobCounts', await queue_5m_bull.getJobCounts())
 
