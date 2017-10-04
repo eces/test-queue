@@ -237,6 +237,10 @@ actions['grpcq.io 테스트'] = function () {
    *  .on('message', handler)
    *  .on('error', error)
    * ```
+   * 
+   * #### 개발하기
+   * 
+   * `DEBUG=grpcq* nodemon index.js`
    */
 
   // const Queue = require('lemongrass')

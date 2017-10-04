@@ -46,3 +46,7 @@ grpcq
  .on('error', error)
 ```
 
+#### 개발하기
+
+`DEBUG=grpcq* nodemon index.js`
+
