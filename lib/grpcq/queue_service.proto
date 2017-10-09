@@ -9,13 +9,12 @@ service QueueService {
 
 message Topic {
   string version = 1;
-  bytes option = 2;
+  string option = 2;
 }
 
 message PostMessage {
-  string name = 1;
-  string data = 2;
-  string option = 3;
+  string version = 1;
+  string body = 2;
 }
 
 message Message {

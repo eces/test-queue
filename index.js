@@ -283,9 +283,49 @@ actions['grpcq.io 테스트'] = function () {
   }
 }
 
+actions['grpcq.io backend 테스트'] = function () {
+  /*
+   * ### grpcq backend 테스트
+   * 
+   */
+
+  try {
+    const grpcq = require('./lib/grpcq')
+    
+    grpcq.createServer({version:1, backend:'memory'}).start()
+  
+    grpcq.subscribe({
+      name: 'dev find reservation 5m',
+      type: 'sqs',
+    })
+    .on('message', (message) => {
+      console.log('[client] got message', message)
+    })
+    .on('error', (error) => {
+      console.log('[client] got error', error)
+    })
+    
+    setInterval(async function(){
+      try {
+        let receipt = await grpcq.publish({
+          name: 'dev find reservation 5m',
+          type: 'sqs',
+          data: 'any data ' + Date.now(),
+        })
+        console.log('[client] published ', receipt)
+      } catch (error) {
+        console.log('[client] publish error ', error)
+      }
+    }, 1000)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 async function main() {
   // actions['bull + grpc.io 테스트']()
-  actions['grpcq.io 테스트']()
+  // actions['grpcq.io 테스트']()
+  actions['grpcq.io backend 테스트']()
   console.log(chalk`> {green NOW RUNNING}`)
   // console.log('> JobCounts', await queue_5m_bull.getJobCounts())
 
